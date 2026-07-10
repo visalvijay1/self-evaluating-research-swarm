@@ -1,38 +1,107 @@
 # ResearchSwarm
 
-# Self-Evaluating Multi-Agent Research Swarm
+**Self-Evaluating Multi-Agent Research and Academic Paper Discovery Platform**
 
-A modern AI research platform interface designed to generate self-evaluated research reports and help users discover highly relevant academic papers.
+ResearchSwarm is an AI-assisted research platform that generates, evaluates and iteratively refines structured research reports while helping users discover and rank relevant academic papers.
 
-The application presents a multi-agent research workflow in which AI agents generate, validate, evaluate, and iteratively refine research reports. It also includes an academic paper discovery interface that ranks papers based on relevance, citation impact, publication recency, and open-access availability.
+The application uses a multi-stage research workflow in which specialized AI components generate reports, validate their structure, evaluate their quality and initiate refinement when required. It also includes an academic paper discovery system that ranks papers using topic relevance, citation impact, publication recency and open-access availability.
+
+> **Repository Scope:** This repository contains the React frontend interface for ResearchSwarm. The research-generation and academic paper-discovery features communicate with backend services during local development.
+
+---
+
+## Application Preview
+
+### Research Orchestration Dashboard
+
+Users can enter a research topic and initiate a structured multi-agent workflow consisting of research generation, schema validation, quality evaluation and iterative decision-making.
+
+![Research Orchestration Dashboard](public/screenshots/research-dashboard.png)
+
+### Self-Evaluated Research Report
+
+The system generates a structured technical report containing key findings, technical analysis, limitations and future work. The report is evaluated using an auditing process that assigns a quality score and provides corrective feedback when refinement is required.
+
+![Self-Evaluated Research Report](public/screenshots/research-report-result.png)
+
+### Intelligent Academic Paper Discovery
+
+Users can search for academic papers using a research topic. The system ranks relevant papers using topic relevance, citation impact, publication recency and open-access availability.
+
+![Academic Paper Discovery](public/screenshots/paper-discovery-results.png)
+
+---
 
 ## Features
 
 ### Self-Evaluating Research Dashboard
 
-- Accepts research topics and questions
-- Displays structured AI-generated research reports
-- Shows key findings and technical analysis
-- Displays limitations and future research directions
-- Shows report quality scores
-- Displays execution time and refinement iterations
+- Accepts research topics and research questions
+- Generates structured AI-assisted research reports
+- Displays key findings and technical analysis
+- Identifies limitations and future research directions
+- Displays report quality scores
+- Tracks execution time and refinement iterations
 - Visualizes the complete self-evaluation history
+- Shows whether a report was approved or required revision
 
-### Multi-Agent Research Pipeline
+### Academic Paper Discovery
 
-The interface represents four specialized stages:
+- Searches for academic papers using a research topic
+- Displays ranked academic paper recommendations
+- Highlights the highest-ranked paper
+- Displays paper titles and authors
+- Displays publication years
+- Displays citation counts
+- Displays publication venues
+- Shows available paper abstracts
+- Provides access to publication pages
+- Provides open-access PDF options when available
 
-1. **Research Agent**  
-   Generates a structured technical research report.
+### Paper Recommendation Criteria
 
-2. **Schema Validator**  
-   Validates the report structure and required output fields.
+Academic papers are ranked using:
 
-3. **Auditor Agent**  
-   Evaluates report quality and generates corrective feedback.
+- Topic relevance
+- Citation impact
+- Publication recency
+- Open-access availability
 
-4. **Decision Engine**  
-   Approves the report or initiates another refinement iteration.
+Each paper receives a recommendation score and a short explanation describing why it was recommended.
+
+---
+
+## How It Works
+
+1. The user submits a research question or topic.
+2. The Research Agent generates a structured technical report.
+3. The Schema Validator verifies the required report structure and output fields.
+4. The Auditor Agent evaluates the quality of the generated report and assigns a score.
+5. The Decision Engine either approves the report or initiates another refinement iteration.
+6. The report is iteratively improved until it satisfies the evaluation criteria or reaches the configured iteration limit.
+7. Users can also search for relevant academic papers and view ranked recommendations.
+
+---
+
+## Multi-Agent Research Pipeline
+
+The research workflow consists of four specialized stages:
+
+### 1. Research Agent
+
+Generates a structured technical research report based on the user's research query.
+
+### 2. Schema Validator
+
+Validates the report structure and verifies that all required output fields are present.
+
+### 3. Auditor Agent
+
+Evaluates the quality, relevance, technical depth and consistency of the report. It assigns a quality score and generates corrective feedback when improvement is required.
+
+### 4. Decision Engine
+
+Approves the generated report when it satisfies the evaluation criteria or initiates another refinement iteration.
 
 ```text
 User Research Query
@@ -59,28 +128,38 @@ Decision Engine
                     └──► Evaluate Again
 ```
 
-### Academic Paper Discovery
+---
 
-- Searches for papers using a research topic
-- Displays ranked academic paper recommendations
-- Highlights the highest-ranked result
-- Displays paper authors
-- Displays publication year
-- Displays citation count
-- Displays publication venue
-- Shows paper abstracts
-- Provides paper and open-access PDF options when available
+## Application Modules
 
-### Paper Recommendation Criteria
+### Generate Report
 
-Academic papers are ranked using:
+The research dashboard allows users to submit a research query and view:
 
-- Topic relevance
-- Citation impact
-- Publication recency
-- Open-access availability
+- Final report title
+- Key research findings
+- Technical analysis
+- Research limitations
+- Future research directions
+- Report quality score
+- Execution time
+- Number of refinement iterations
+- Self-evaluation history
+- Approval or revision status
 
-Each paper receives a recommendation score and a short explanation of why it was recommended.
+### Discover Papers
+
+The academic paper discovery interface allows users to:
+
+- Enter a research topic
+- Select a ranking preference
+- View ranked paper recommendations
+- Compare recommendation scores
+- Read available abstracts
+- Access paper publication pages
+- Open available research PDFs
+
+---
 
 ## Technology Stack
 
@@ -92,12 +171,21 @@ Each paper receives a recommendation score and a short explanation of why it was
 - Framer Motion
 - React Icons
 
+---
+
 ## Project Structure
 
 ```text
 frontend/
 │
 ├── public/
+│   ├── screenshots/
+│   │   ├── research-dashboard.png
+│   │   ├── research-report-result.png
+│   │   └── paper-discovery-results.png
+│   │
+│   ├── favicon.svg
+│   └── icons.svg
 │
 ├── src/
 │   ├── assets/
@@ -105,46 +193,61 @@ frontend/
 │   ├── components/
 │   │   ├── AgentCard.jsx
 │   │   ├── AgentPipeline.jsx
+│   │   ├── AuditTimeline.jsx
 │   │   ├── Hero.jsx
+│   │   ├── MetricCard.jsx
+│   │   ├── MetricsPanel.jsx
 │   │   ├── Navbar.jsx
-│   │   └── SearchBox.jsx
+│   │   ├── PaperCard.jsx
+│   │   ├── PaperSearchBox.jsx
+│   │   ├── ReportSection.jsx
+│   │   ├── SearchBox.jsx
+│   │   └── TimelineItem.jsx
 │   │
 │   ├── pages/
 │   │   ├── Dashboard.jsx
 │   │   └── PaperDiscovery.jsx
 │   │
 │   ├── services/
+│   │   ├── api.js
+│   │   └── paperApi.js
+│   │
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
 │
+├── .gitignore
+├── eslint.config.js
+├── index.html
 ├── package.json
 ├── package-lock.json
 ├── vite.config.js
 └── README.md
 ```
 
+---
+
 ## Installation
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/visalvijay1/self-evaluating-research-swarm.git
 ```
 
-Move into the project directory:
+### 2. Move into the project directory
 
 ```bash
-cd <repository-name>
+cd self-evaluating-research-swarm
 ```
 
-Install the required dependencies:
+### 3. Install the required dependencies
 
 ```bash
 npm install
 ```
 
-Start the development server:
+### 4. Start the development server
 
 ```bash
 npm run dev
@@ -152,50 +255,42 @@ npm run dev
 
 Open the local URL displayed by Vite in the terminal.
 
-## Application Modules
+The development server will typically run at:
 
-### Generate Report
+```text
+http://localhost:5173
+```
 
-The research dashboard allows users to submit a research query and view:
+> The report-generation and academic paper-discovery functions require their corresponding backend services to be available during local development.
 
-- Final report title
-- Key research findings
-- Technical analysis
-- Limitations
-- Future work
-- Quality score
-- Number of refinement iterations
-- Self-evaluation history
-
-### Discover Papers
-
-The academic discovery interface allows users to:
-
-- Enter a research topic
-- Select a ranking preference
-- View ranked paper recommendations
-- Read available abstracts
-- Access paper publication pages
-- Open available research PDFs
+---
 
 ## Current Limitations
 
-- Search results depend on the availability of external academic data.
-- Some papers may not contain abstracts or open-access PDFs.
-- Recommendation scores are ranking indicators and do not guarantee academic quality.
+- Research generation requires access to the corresponding backend AI service.
+- Academic paper search depends on the availability of external scholarly data providers.
+- Some papers may not include abstracts, publication venues or open-access PDFs.
+- Recommendation scores are ranking indicators and do not guarantee the academic quality of a paper.
+- Citation counts and publication metadata depend on the information returned by external academic sources.
 - Generated research content should be independently verified before formal academic use.
+
+---
 
 ## Future Enhancements
 
-- Semantic paper ranking using embeddings
-- Paper comparison
+- Semantic paper ranking using text embeddings
+- Side-by-side paper comparison
 - Saved research collections
-- Search history
-- Citation generation
-- BibTeX export
+- Research and search history
+- Automatic citation generation
+- BibTeX citation export
 - PDF and DOCX report export
 - User authentication
+- Personalized paper recommendations
+- Research report download functionality
+
+---
 
 ## Disclaimer
 
-This application is intended as an AI-assisted research interface. Generated reports and academic paper recommendations should be independently reviewed and verified using original research sources.
+ResearchSwarm is intended as an AI-assisted research and academic discovery interface. Generated reports, quality scores and academic paper recommendations should be independently reviewed and verified using original research sources before being used in formal academic or professional work.
