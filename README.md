@@ -1,4 +1,4 @@
-# ResearcHSwarm
+# ResearchSwarm
 
 # Self-Evaluating Multi-Agent Research Swarm
 
