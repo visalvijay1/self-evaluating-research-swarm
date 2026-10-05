@@ -479,7 +479,10 @@ export default function Dashboard() {
 
                 {/* Agent Pipeline */}
 
-                <AgentPipeline />
+                <AgentPipeline
+                    loading={loading}
+                    result={result}
+                />
 
 
                 {/* Generated Research */}

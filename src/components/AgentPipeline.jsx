@@ -7,120 +7,78 @@ import {
 
 import AgentCard from "./AgentCard";
 
+export default function AgentPipeline({ loading, result }) {
+    const getStatus = (stage) => {
+        if (loading) {
+            if (stage === 1) {
+                return "Running";
+            }
 
-export default function AgentPipeline() {
+            return "Waiting";
+        }
+
+        if (result) {
+            if (stage === 4) {
+                return "Approved";
+            }
+
+            return "Completed";
+        }
+
+        return "Waiting";
+    };
 
     return (
-
         <section className="mt-20">
-
-            {/* Pipeline Heading */}
-
             <div>
-
                 <h2 className="text-3xl font-bold">
-
                     Research Orchestration Pipeline
-
                 </h2>
 
-
                 <p className="mt-2 text-slate-400">
-
                     Every request moves through generation,
                     deterministic validation, AI evaluation
                     and iterative refinement.
-
                 </p>
-
             </div>
-
-
-            {/* Pipeline Stages */}
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">
-
-
-                {/* Stage 1: Research Generation */}
-
                 <AgentCard
-
                     icon={<FaFlask />}
-
                     title="Research Agent"
-
                     description="Generates a structured technical research report."
-
-                    status="Waiting"
-
+                    status={getStatus(1)}
                     color="text-cyan-400"
-
                     stageNumber="01"
-
                 />
 
-
-                {/* Stage 2: Deterministic Validation */}
-
                 <AgentCard
-
                     icon={<FaClipboardCheck />}
-
                     title="Schema Validator"
-
                     description="Validates report structure and quality constraints."
-
-                    status="Waiting"
-
+                    status={getStatus(2)}
                     color="text-yellow-400"
-
                     stageNumber="02"
-
                 />
 
-
-                {/* Stage 3: AI Quality Evaluation */}
-
                 <AgentCard
-
                     icon={<FaShieldAlt />}
-
                     title="Auditor Agent"
-
                     description="Evaluates quality and generates corrective feedback."
-
-                    status="Waiting"
-
+                    status={getStatus(3)}
                     color="text-green-400"
-
                     stageNumber="03"
-
                 />
-
-
-                {/* Stage 4: Approval or Revision */}
 
                 <AgentCard
-
                     icon={<FaBrain />}
-
                     title="Decision Engine"
-
                     description="Approves the report or initiates another iteration."
-
-                    status="Waiting"
-
+                    status={getStatus(4)}
                     color="text-purple-400"
-
                     stageNumber="04"
-
                 />
-
-
             </div>
-
         </section>
-
     );
-
 }

@@ -1,40 +1,47 @@
 import { motion } from "framer-motion";
 
-
 export default function AgentCard({
-
     icon,
-
     title,
-
     description,
-
     status,
-
     color,
-
     stageNumber,
-
 }) {
+    const statusStyles = {
+        Waiting: {
+            dot: "bg-slate-500",
+            text: "text-slate-400",
+        },
+        Running: {
+            dot: "bg-cyan-400 animate-pulse",
+            text: "text-cyan-300",
+        },
+        Completed: {
+            dot: "bg-green-400",
+            text: "text-green-300",
+        },
+        Approved: {
+            dot: "bg-green-400",
+            text: "text-green-300",
+        },
+        Failed: {
+            dot: "bg-red-400",
+            text: "text-red-300",
+        },
+    };
+
+    const currentStyle = statusStyles[status] ?? statusStyles.Waiting;
 
     return (
-
         <motion.article
-
             whileHover={{
-
                 scale: 1.015,
-
                 y: -3,
-
             }}
-
             transition={{
-
                 duration: 0.2,
-
             }}
-
             className="
             group
             relative
@@ -49,14 +56,8 @@ export default function AgentCard({
             transition-colors
             hover:border-slate-700
             "
-
         >
-
-
-            {/* Subtle Hover Glow */}
-
             <div
-
                 className="
                 pointer-events-none
                 absolute
@@ -70,14 +71,9 @@ export default function AgentCard({
                 duration-300
                 group-hover:opacity-100
                 "
-
             />
 
-
-            {/* Card Content */}
-
             <div
-
                 className="
                 relative
                 flex
@@ -85,27 +81,15 @@ export default function AgentCard({
                 justify-between
                 gap-5
                 "
-
             >
-
-
-                {/* Icon and Information */}
-
                 <div
-
                     className="
                     flex
                     items-start
                     gap-5
                     "
-
                 >
-
-
-                    {/* Agent Icon */}
-
                     <div
-
                         className={`
                         flex
                         h-14
@@ -118,116 +102,73 @@ export default function AgentCard({
                         text-3xl
                         ${color}
                         `}
-
                     >
-
                         {icon}
-
                     </div>
 
-
-                    {/* Agent Details */}
-
                     <div>
-
                         <h3
-
                             className="
                             text-lg
                             font-semibold
                             text-white
                             "
-
                         >
-
                             {title}
-
                         </h3>
 
-
                         <p
-
                             className="
                             mt-1
                             text-sm
                             leading-6
                             text-slate-400
                             "
-
                         >
-
                             {description}
-
                         </p>
 
-
-                        {/* Current Status */}
-
                         <div
-
                             className="
                             mt-4
                             flex
                             items-center
                             gap-2
                             "
-
                         >
-
                             <span
-
-                                className="
+                                className={`
                                 h-2
                                 w-2
                                 rounded-full
-                                bg-slate-500
-                                "
-
+                                ${currentStyle.dot}
+                                `}
                             />
 
-
                             <span
-
-                                className="
+                                className={`
                                 text-sm
                                 font-medium
-                                text-slate-400
-                                "
-
+                                ${currentStyle.text}
+                                `}
                             >
-
                                 {status}
-
                             </span>
-
                         </div>
-
                     </div>
-
                 </div>
 
-
-                {/* Pipeline Stage Number */}
-
                 <span
-
                     className="
                     text-sm
                     font-bold
                     tracking-wider
                     text-slate-600
                     "
-
                 >
-
                     {stageNumber}
-
                 </span>
-
             </div>
-
         </motion.article>
-
     );
-
 }
